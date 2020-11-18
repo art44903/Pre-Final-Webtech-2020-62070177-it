@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>
+        let requestURL = 'ezquiz.json';
+        let request = new XMLHttpRequest();
+        request.onreadystatechange = function () {
+            if (request.readyState == 4 && request.status == 200) {
+                dataReportStatus(JSON.parse(request.responseText));
+            }
+        };
+        request.open("GET", requestURL, true);
+        request.send();
+
+        function dataReportStatus(data) {
+            let showing = document.getElementById("show");
+            for (let i = 0; i < data.tracks.items.length; i++) {
+                showing.innerHTML += "<div class='col col-md-5 col-lg-4' > <div class='card'><img class='card-img-top' src="
+                    + data.tracks.items[i].images + "><div class='card-body'><h5 class='card-title'>" + data.tracks.items[i].artists.name
+                        + "</h5> <p class='card-text'>" +data.tracks.items[i].artists.type
+                            + "</div></div>";
+            }
+            
+        }
+    </script>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Chakra Petch', sans-serif;
+        }
+
+        .header {
+            overflow: hidden;
+            background-color: #6557e9;
+            padding: 20px 10px;
+        }
+
+        .header a {
+            float: left;
+            color: rgb(240, 240, 240);
+            text-align: center;
+            padding: 12px;
+            text-decoration: none;
+            font-size: 18px;
+            line-height: 25px;
+            border-radius: 4px;
+        }
+
+        .header a.logo {
+            font-size: 50px;
+            font-weight: bold;
+        }
+
+        .header a:hover {
+            background-color: #ddd;
+            color: rgb(97, 43, 43);
+        }
+
+        .header a.active {
+            background-color: dodgerblue;
+            color: white;
+        }
+       
+        h1{
+            font-size: 45px;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        
+        <div class="row" id="show">
+        </div>
+<br>
+      
+    </div>
+
+</body>
+
+</html>
